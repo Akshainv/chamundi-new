@@ -1,0 +1,147 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.header.scrolled {
+    padding: 0.8rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.logo-text {
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.logo-main {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.logo-sub {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* White text for non-home pages */
+.header.white-nav .logo-main,
+.header.white-nav .logo-sub {
+    color: white;
+}
+
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-dark);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* White navbar for non-home pages */
+.header.white-nav .logo-text,
+.header.white-nav .nav-link {
+    color: white;
+}
+
+.header.white-nav .mobile-menu-btn {
+    color: white;
+}
+
+.header.white-nav .nav-link::after {
+    background-color: white;
+}
+
+.mobile-menu-btn {
+    display: none;
+    color: var(--primary-color);
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .desktop-nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .mobile-nav {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: var(--white);
+        padding: 6rem 2rem;
+        gap: 2rem;
+        transition: 0.4s ease;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-nav.open {
+        right: 0;
+    }
+
+    .mobile-link {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
