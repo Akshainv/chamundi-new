@@ -14,6 +14,19 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* About Story Section Grid */
+.about-story .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.about-img {
+    display: flex;
+    justify-content: center;
+}
+
 .commitment-list {
     list-style: none;
     margin-top: 1.5rem;
