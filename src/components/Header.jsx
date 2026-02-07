@@ -86,7 +86,13 @@ const Header = () => {
         <header className={`header ${scrolled ? 'scrolled glass' : ''} white-nav`}>
             <div className="container header-content">
                 <Link to="/" onClick={() => scrollToSection('home')} className="logo">
-                    <img src="/images/optimized/logo_chamundi.webp" alt="Chamundi Yoga" className="logo-img" />
+                    <img
+                        src="/images/optimized/logo_chamundi.webp"
+                        alt="Chamundi Yoga"
+                        className="logo-img"
+                        width="40"
+                        height="40"
+                    />
                     <span className="logo-text">
                         <span className="logo-main">Yoga Retreat</span>
                         <span className="logo-sub">Chamundi Hill Palace</span>

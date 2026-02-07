@@ -60,7 +60,8 @@ const Home = () => {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
+            poster="/images/optimized/yoga.png"
             className="hero-video"
           >
             <source src="/chamundi .mp4" type="video/mp4" />

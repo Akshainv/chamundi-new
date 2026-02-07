@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;600;700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
 :root {
   --primary-color: #5d8a54;
   /* Forest Green from logo */
@@ -29,10 +31,21 @@ body {
   width: 100%;
 }
 
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  animation: fadeInPage 0.8s ease-out forwards;
 }
 
 main {

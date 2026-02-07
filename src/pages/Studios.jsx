@@ -55,7 +55,7 @@ const Studios = () => {
                             transition={{ duration: 0.6 }}
                         >
                             <div className="studio-img">
-                                <img src={studio.img} alt={studio.name} />
+                                <img src={studio.img} alt={studio.name} loading="lazy" />
                             </div>
                             <div className="studio-content">
                                 <h2>{studio.name}</h2>
@@ -87,7 +87,7 @@ const Studios = () => {
                             transition={{ duration: 0.8 }}
                         >
                             <div className="package-visual-pro">
-                                <img src={allInclusivePackage.img} alt={allInclusivePackage.name} />
+                                <img src={allInclusivePackage.img} alt={allInclusivePackage.name} loading="lazy" />
                                 <div className="package-tag">Primary Offering</div>
                             </div>
                             <div className="package-content-pro">

@@ -14,7 +14,7 @@ const About = () => {
             <section className="about-story">
                 <div className="container grid-2">
                     <div className="about-img">
-                        <img src="/images/optimized/005.webp" alt="Our Sanctuary" />
+                        <img src="/images/optimized/005.webp" alt="Our Sanctuary" loading="lazy" />
                     </div>
                     <div className="about-text">
                         <h2>Our Journey</h2>
