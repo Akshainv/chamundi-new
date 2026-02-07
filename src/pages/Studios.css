@@ -1,6 +1,6 @@
 .page-header {
     padding: 10rem 0 5rem;
-    background: linear-gradient(rgba(45, 90, 45, 0.7), rgba(45, 90, 45, 0.7)), url('/images/optimized/studio.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/optimized/studio.webp');
     background-size: cover;
     background-position: center;
     color: white;
@@ -23,7 +23,8 @@
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
     align-items: center;
-    margin-bottom: 8rem;
+    margin-bottom: 2rem;
+    /* Reduced from 8rem */
 }
 
 .studio-detail-card.reverse {
@@ -204,7 +205,8 @@
 /* --- Consolidated Package Styles (Premium Card) --- */
 .single-package-container {
     max-width: 1050px;
-    margin: 4rem auto 0;
+    margin: 2rem auto 0;
+    /* Reduced from 4rem */
 }
 
 .package-card-premium {

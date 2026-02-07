@@ -10,7 +10,8 @@
 
 .header.scrolled {
     padding: 0.8rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
@@ -41,7 +42,8 @@
 .logo-main {
     font-weight: 600;
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: #1b3317;
+    /* Deep Heritage Green */
     letter-spacing: -0.5px;
     text-transform: uppercase;
 }
@@ -49,16 +51,31 @@
 .logo-sub {
     font-weight: 400;
     font-size: 0.75rem;
-    color: var(--primary-color);
+    color: #1b3317;
+    /* Deep Heritage Green */
     opacity: 0.8;
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
-/* White text for non-home pages */
-.header.white-nav .logo-main,
-.header.white-nav .logo-sub {
+/* White text for non-home pages - nav only, not logo (when NOT scrolled) */
+.header.white-nav:not(.scrolled) .nav-link,
+.header.white-nav:not(.scrolled) .nav-link-btn {
     color: white;
+}
+
+.header.white-nav:not(.scrolled) .mobile-menu-btn {
+    color: white;
+}
+
+/* Dark text when scrolled (white background) */
+.header.scrolled .nav-link,
+.header.scrolled .nav-link-btn {
+    color: #1b3317 !important;
+}
+
+.header.scrolled .mobile-menu-btn {
+    color: #1b3317 !important;
 }
 
 .desktop-nav {

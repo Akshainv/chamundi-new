@@ -166,7 +166,7 @@ h3 {
 
 /* --- Offer Section (The Fix) --- */
 .offer-section {
-    padding: 5rem 0 3rem;
+    padding: 4rem 0;
     background-color: var(--bg-light);
 }
 
@@ -308,7 +308,7 @@ h3 {
 }
 
 .spaces-preview {
-    padding: 6rem 0;
+    padding: 4rem 0;
 }
 
 .spaces-grid {
@@ -468,7 +468,7 @@ h3 {
 
 /* --- CTA Section --- */
 .cta-section {
-    padding: 8rem 0;
+    padding: 4rem 0;
     background: linear-gradient(rgba(244, 247, 242, 0.9), rgba(244, 247, 242, 0.9)), url('/images/optimized/010.webp');
     background-size: cover;
     background-position: center;
@@ -501,7 +501,7 @@ h3 {
 .spaces-preview {
     background-color: #fcfcfc;
     /* Very light grey/white distinction */
-    padding: 6rem 0;
+    padding: 4rem 0;
 }
 
 .spaces-grid {
@@ -659,7 +659,7 @@ h3 {
 
 /* --- Journey Section (25 Years Excellence) --- */
 .journey-section-enhanced {
-    padding: 4rem 0 6rem;
+    padding: 4rem 0;
     background-color: var(--white);
     overflow: hidden;
 }

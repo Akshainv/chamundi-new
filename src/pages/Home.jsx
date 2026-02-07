@@ -7,7 +7,7 @@ const OFFERINGS = [
   {
     title: "Equipped Yoga Hall",
     desc: "Professional spaces with all yoga props and sound systems.",
-    img: "/images/optimized/091.jpg",
+    img: "/images/optimized/048.jpg",
   },
   {
     title: "Peaceful Environment",

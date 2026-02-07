@@ -27,7 +27,7 @@ const Booking = () => {
         <div id="booking" className="booking-page">
             <header className="page-header booking-header">
                 <div className="container">
-                    <h1>Sadhana Space Booking</h1>
+                    <h1>Booking Form</h1>
                     <p>Reserve your sanctuary for practice and growth.</p>
                 </div>
             </header>
@@ -198,15 +198,6 @@ const Booking = () => {
                             </ul>
                         </div>
 
-                        <div className="sidebar-box how-to">
-                            <h3>How to Book</h3>
-                            <ol>
-                                <li>Choose your yoga hall and time</li>
-                                <li>Submit the booking form</li>
-                                <li>Receive confirmation by email</li>
-                                <li>Make payment to secure slot</li>
-                            </ol>
-                        </div>
                     </div>
                 </div>
             </section>

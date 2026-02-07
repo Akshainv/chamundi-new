@@ -1,5 +1,5 @@
 .services-header {
-    background-image: url('/images/optimized/yoga.png');
+    background-image: url('/images/optimized/046.jpg');
 }
 
 .grid-2 {
@@ -163,4 +163,13 @@
         grid-template-columns: 1fr;
         gap: 3rem;
     }
+}
+
+/* Section Spacing */
+.booking-info {
+    padding: 4rem 0 2rem;
+}
+
+.additional-services {
+    padding: 2rem 0 4rem;
 }
