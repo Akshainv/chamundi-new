@@ -1,19 +1,13 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, Clock, Users, MessageSquare, Info, ArrowRight, Award, Instagram, Facebook, Mail } from 'lucide-react';
+import { Calendar, Clock, Users, MessageSquare, Info, ArrowRight, Award, Instagram, Facebook, Mail, Loader2, CheckCircle2, AlertCircle, Linkedin, Youtube } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import './Booking.css';
 
-// EmailJS Configuration
-const EMAILJS_SERVICE_ID = 'service_cpjd2t6';
-const EMAILJS_TEMPLATE_ID = 'template_kw9pyac';
-const EMAILJS_PUBLIC_KEY = 'g29o6rhguUYNKXTAf';
-
 const Booking = () => {
-    const formRef = useRef();
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState(null);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -23,24 +17,27 @@ const Booking = () => {
         time: '',
         duration: '1',
         participants: '',
-        purpose: 'class',
+        purpose: 'Yoga Class / Session',
         requirements: '',
     });
 
-    const handleSubmit = async (e) => {
+
+    const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Custom Validation
+        if (!formData.name.trim()) return toast.error("Please enter your full name.");
+        if (!formData.email.trim()) return toast.error("Please enter your email address.");
+        if (!formData.phone.trim()) return toast.error("Please enter your phone number.");
+        if (!formData.country.trim()) return toast.error("Please enter your country.");
+        if (!formData.date) return toast.error("Please choose a date.");
+        if (!formData.time) return toast.error("Please choose a preferred time.");
+        if (!formData.participants || formData.participants < 1) return toast.error("Please enter number of participants (minimum 1).");
+
         setIsSubmitting(true);
-        setSubmitStatus(null);
+        // setSubmitStatus(null); // Removed as per instruction
 
-        // Map purpose values to full display text
-        const purposeLabels = {
-            'class': 'Yoga Class / Session',
-            'workshop': 'Workshop / Event',
-            'private': 'Private Practice',
-            'retreat': 'Retreat'
-        };
-
-        // Prepare template parameters
+        // emailjs.send(serviceID, templateID, templateParams, publicKey);
         const templateParams = {
             from_name: formData.name,
             from_email: formData.email,
@@ -50,40 +47,45 @@ const Booking = () => {
             time: formData.time,
             duration: formData.duration,
             participants: formData.participants,
-            purpose: purposeLabels[formData.purpose] || formData.purpose,
-            requirements: formData.requirements,
+            purpose: formData.purpose,
+            requirements: formData.requirements || 'None provided',
         };
 
-        try {
-            await emailjs.send(
-                EMAILJS_SERVICE_ID,
-                EMAILJS_TEMPLATE_ID,
-                templateParams,
-                EMAILJS_PUBLIC_KEY
-            );
-
-            setSubmitStatus('success');
-            toast.success('Booking request sent successfully! We will contact you shortly.');
-            // Reset form
-            setFormData({
-                name: '',
-                email: '',
-                phone: '',
-                country: '',
-                date: '',
-                time: '',
-                duration: '1',
-                participants: '',
-                purpose: 'class',
-                requirements: '',
+        emailjs.send(
+            'service_cpjd2t6',
+            'template_kw9pyac',
+            templateParams,
+            'g29o6rhguUYNKXTAf'
+        )
+            .then((result) => {
+                console.log('SUCCESS!', result.text);
+                toast.success("Booking Request Submitted! We will contact you shortly."); // Changed to toast
+                // setSubmitStatus('success'); // Removed as per instruction
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    country: '',
+                    date: '',
+                    time: '',
+                    duration: '1',
+                    participants: '',
+                    purpose: 'Yoga Class / Session',
+                    requirements: '',
+                });
+            }, (error) => {
+                console.log('FAILED...', error.text);
+                toast.error("Submission Failed. Please try again or contact us directly."); // Changed to toast
+                // setSubmitStatus('error'); // Removed as per instruction
+            })
+            .finally(() => {
+                setIsSubmitting(false);
             });
-        } catch (error) {
-            console.error('EmailJS Error:', error);
-            setSubmitStatus('error');
-            toast.error('Failed to send request. Please try again or contact us directly.');
-        } finally {
-            setIsSubmitting(false);
-        }
+    };
+
+    const handleComingSoon = (e) => { // Added handleComingSoon function
+        e.preventDefault();
+        toast.info("Coming soon!");
     };
 
     return (
@@ -99,13 +101,35 @@ const Booking = () => {
                 <div className="container grid-booking">
                     <div className="booking-form-container">
                         <h2>Booking Form</h2>
-                        <form onSubmit={handleSubmit} className="booking-form">
+
+                        {/* Removed submitStatus conditional rendering as per instruction
+                        {submitStatus === 'success' && (
+                            <div className="status-message success">
+                                <CheckCircle2 size={20} />
+                                <div>
+                                    <strong>Booking Requested!</strong>
+                                    <p>We've received your request and will contact you shortly at {formData.email || 'your email'}.</p>
+                                </div>
+                            </div>
+                        )}
+
+                        {submitStatus === 'error' && (
+                            <div className="status-message error">
+                                <AlertCircle size={20} />
+                                <div>
+                                    <strong>Submission Failed</strong>
+                                    <p>Something went wrong. Please try again or contact us directly.</p>
+                                </div>
+                            </div>
+                        )} */}
+
+                        <form onSubmit={handleSubmit} className="booking-form" noValidate> {/* Added noValidate */}
                             <div className="form-group">
                                 <label>Full Name <span className="required-star">*</span></label>
                                 <input
                                     type="text"
                                     placeholder="Enter your full name"
-                                    required
+                                    // required Removed as per instruction
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 />
@@ -117,7 +141,7 @@ const Booking = () => {
                                     <input
                                         type="email"
                                         placeholder="email@example.com"
-                                        required
+                                        // required Removed as per instruction
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     />
@@ -127,7 +151,7 @@ const Booking = () => {
                                     <input
                                         type="tel"
                                         placeholder="+91 XXXXX XXXXX"
-                                        required
+                                        // required Removed as per instruction
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                     />
@@ -139,7 +163,7 @@ const Booking = () => {
                                 <input
                                     type="text"
                                     placeholder="Enter your country"
-                                    required
+                                    // required Removed as per instruction
                                     value={formData.country}
                                     onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                                 />
@@ -150,7 +174,7 @@ const Booking = () => {
                                     <label>Choose Date <span className="required-star">*</span></label>
                                     <input
                                         type="date"
-                                        required
+                                        // required Removed as per instruction
                                         value={formData.date}
                                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                                     />
@@ -159,7 +183,7 @@ const Booking = () => {
                                     <label>Preferred Time <span className="required-star">*</span></label>
                                     <input
                                         type="time"
-                                        required
+                                        // required Removed as per instruction
                                         value={formData.time}
                                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                                     />
@@ -173,7 +197,7 @@ const Booking = () => {
                                         type="number"
                                         min="1"
                                         placeholder="1"
-                                        required
+                                        // required Removed as per instruction
                                         value={formData.duration}
                                         onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                                     />
@@ -183,7 +207,7 @@ const Booking = () => {
                                     <input
                                         type="number"
                                         min="1"
-                                        required
+                                        // required Removed as per instruction
                                         value={formData.participants}
                                         onChange={(e) => setFormData({ ...formData, participants: e.target.value })}
                                     />
@@ -192,42 +216,36 @@ const Booking = () => {
 
                             <div className="form-group">
                                 <label>Purpose <span className="required-star">*</span></label>
-                                <select required value={formData.purpose} onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}>
-                                    <option value="class">Yoga Class / Session</option>
-                                    <option value="workshop">Workshop / Event</option>
-                                    <option value="private">Private Practice</option>
-                                    <option value="retreat">Retreat</option>
+                                <select // required Removed as per instruction
+                                    value={formData.purpose} onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}>
+                                    <option value="Yoga Class / Session">Yoga Class / Session</option>
+                                    <option value="Workshop / Event">Workshop / Event</option>
+                                    <option value="Private Practice">Private Practice</option>
+                                    <option value="Retreat">Retreat</option>
                                 </select>
                             </div>
 
                             <div className="form-group">
-                                <label>Special Requirements (Optional)</label>
+                                <label>Special Requirements</label>
                                 <textarea
                                     rows="4"
-                                    placeholder="Any specific equipment or setup needed?"
+                                    placeholder="Any specific equipment or setup needed? (Optional)"
                                     value={formData.requirements}
                                     onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
                                 ></textarea>
                             </div>
 
-                            {submitStatus === 'success' && (
-                                <div className="form-message success">
-                                    ✓ Booking request sent successfully! We will contact you shortly.
-                                </div>
-                            )}
-
-                            {submitStatus === 'error' && (
-                                <div className="form-message error">
-                                    ✗ Failed to send request. Please try again or contact us directly.
-                                </div>
-                            )}
-
                             <button
                                 type="submit"
-                                className="btn btn-primary"
+                                className={`btn btn-primary ${isSubmitting ? 'loading' : ''}`}
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? 'Sending...' : 'Submit Booking Request'}
+                                {isSubmitting ? (
+                                    <>
+                                        <Loader2 className="spinner" size={18} />
+                                        Sending...
+                                    </>
+                                ) : 'Submit Booking Request'}
                             </button>
                         </form>
                     </div>
@@ -236,27 +254,34 @@ const Booking = () => {
                         <div className="sidebar-box connect-box">
                             <h3>Connect With Us</h3>
                             <div className="connect-links">
-                                <a href="#" className="connect-item">
+                                <a href="https://www.instagram.com/chamundihillpalaceayurveda/" target="_blank" rel="noopener noreferrer" className="connect-item">
                                     <Instagram size={24} />
                                     <div>
                                         <strong>Instagram</strong>
-                                        <span>@keralayogaspaces</span>
+                                        <span>@chamundihillpalaceayurveda</span>
                                     </div>
                                 </a>
-                                <a href="#" className="connect-item">
+                                <a href="https://www.facebook.com/Chamundiayurvedaresort/" target="_blank" rel="noopener noreferrer" className="connect-item">
                                     <Facebook size={24} />
                                     <div>
                                         <strong>Facebook</strong>
-                                        <span>Kerala Ayurveda Yoga</span>
+                                        <span>Chamundi Ayurveda Resort</span>
                                     </div>
                                 </a>
-                                <div className="connect-item no-link">
-                                    <Mail size={24} />
+                                <a href="https://www.linkedin.com/company/chamundi-hill-palace-ayurveda-resort" target="_blank" rel="noopener noreferrer" className="connect-item">
+                                    <Linkedin size={24} />
                                     <div>
-                                        <strong>Newsletter Signup</strong>
-                                        <span>Stay updated with our events</span>
+                                        <strong>LinkedIn</strong>
+                                        <span>Chamundi Hill Palace</span>
                                     </div>
-                                </div>
+                                </a>
+                                <a href="https://www.youtube.com/@chamundihillpalaceayurveda8025" target="_blank" rel="noopener noreferrer" className="connect-item">
+                                    <Youtube size={24} />
+                                    <div>
+                                        <strong>YouTube</strong>
+                                        <span>Official Channel</span>
+                                    </div>
+                                </a>
                             </div>
                         </div>
 

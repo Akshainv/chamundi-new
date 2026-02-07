@@ -3,8 +3,6 @@ import { useEffect, lazy, Suspense, memo } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 // Lazy load page components for faster initial load
 const Home = lazy(() => import('./pages/Home'));
@@ -61,18 +59,6 @@ function App() {
     return (
         <Router>
             <ScrollToHash />
-            <ToastContainer
-                position="top-right"
-                autoClose={4000}
-                hideProgressBar={false}
-                newestOnTop
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            />
             <div className="app-container">
                 <Header />
                 <main>

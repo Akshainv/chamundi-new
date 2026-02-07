@@ -1,8 +1,14 @@
-import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './Footer.css';
 
 const Footer = () => {
+    const handleComingSoon = (e) => {
+        e.preventDefault();
+        toast.info("Coming soon!");
+    };
+
     return (
         <footer className="footer">
             <div className="container">
@@ -11,8 +17,10 @@ const Footer = () => {
                         <img src="/images/optimized/logo_chamundi.webp" alt="Chamundi Yoga" className="footer-logo" />
                         <p>Peaceful sanctuary for yoga, meditation, and wellness in the heart of Kerala.</p>
                         <div className="social-links">
-                            <a href="#" aria-label="Instagram"><Instagram size={20} /></a>
-                            <a href="#" aria-label="Facebook"><Facebook size={20} /></a>
+                            <a href="https://www.instagram.com/chamundihillpalaceayurveda/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram size={20} /></a>
+                            <a href="https://www.facebook.com/Chamundiayurvedaresort/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook size={20} /></a>
+                            <a href="https://www.linkedin.com/company/chamundi-hill-palace-ayurveda-resort" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={20} /></a>
+                            <a href="https://www.youtube.com/@chamundihillpalaceayurveda8025" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><Youtube size={20} /></a>
                         </div>
                     </div>
 
