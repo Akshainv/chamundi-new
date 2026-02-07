@@ -61,7 +61,6 @@ const Home = () => {
             loop
             playsInline
             preload="auto"
-            poster="/images/optimized/yoga.png"
             className="hero-video"
           >
             <source src="/chamundi .mp4" type="video/mp4" />
