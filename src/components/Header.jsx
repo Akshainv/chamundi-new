@@ -83,7 +83,7 @@ const Header = () => {
     ];
 
     return (
-        <header className={`header ${scrolled ? 'scrolled glass' : ''} white-nav`}>
+        <header className={`header ${scrolled ? 'scrolled' : ''} white-nav`}>
             <div className="container header-content">
                 <Link to="/" onClick={() => scrollToSection('home')} className="logo">
                     <img
@@ -106,32 +106,14 @@ const Header = () => {
                             key={link.id}
                             onClick={() => scrollToSection(link.id)}
                             className={`nav-link-btn ${activeSection === link.id ? 'active' : ''}`}
-                            style={{
-                                background: 'none',
-                                border: 'none',
-                                cursor: 'pointer',
-                                fontSize: '1rem',
-                                fontFamily: 'inherit',
-                                position: 'relative',
-                                fontWeight: activeSection === link.id ? '600' : '500',
-                                color: 'inherit'
-                            }}
                         >
                             {link.name}
                             {activeSection === link.id && (
-                                <span style={{
-                                    position: 'absolute',
-                                    bottom: '-4px',
-                                    left: '0',
-                                    width: '100%',
-                                    height: '2px',
-                                    backgroundColor: 'var(--primary-color, green)',
-                                    transition: 'width 0.3s ease'
-                                }}></span>
+                                <span className="nav-underline"></span>
                             )}
                         </button>
                     ))}
-                    <button onClick={() => scrollToSection('booking')} className="btn btn-primary">Book Now</button>
+                    <button onClick={() => scrollToSection('booking')} className="btn btn-primary nav-cta">Book Now</button>
                 </nav>
 
                 {/* Mobile Menu Button */}
