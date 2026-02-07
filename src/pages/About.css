@@ -1,5 +1,5 @@
 .about-header {
-    background-image: url('/images/optimized/001.webp');
+    background-image: url('/images/optimized/yoga.png');
 }
 
 .about-img img {
@@ -185,6 +185,7 @@
         padding: 2rem;
     }
 }
+
 /* --- Get in Touch Form Styling --- */
 .contact-form {
     display: flex;
