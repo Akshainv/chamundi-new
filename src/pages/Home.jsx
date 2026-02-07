@@ -63,7 +63,7 @@ const Home = () => {
             preload="metadata"
             className="hero-video"
           >
-            <source src="/chamundi-hero.mp4" type="video/mp4" />
+            <source src="/chamundi-org.mp4" type="video/mp4" />
           </video>
         </div>
 
