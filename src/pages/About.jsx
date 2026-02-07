@@ -56,14 +56,14 @@ const About = () => {
                                 <Phone className="icon" />
                                 <div>
                                     <h4>Phone</h4>
-                                    <p>+91-XXXXXXXXXX</p>
+                                    <p>+91-9447870386</p>
                                 </div>
                             </div>
                             <div className="contact-card">
                                 <Mail className="icon" />
                                 <div>
                                     <h4>Email</h4>
-                                    <p>info@keralayogaspaces.com</p>
+                                    <p>chamundikerala@gmail.com</p>
                                 </div>
                             </div>
                             <div className="contact-card">

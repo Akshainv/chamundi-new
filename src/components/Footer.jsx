@@ -16,27 +16,23 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    <div className="footer-contact">
+                    <div className="footer-links-section">
                         <h3>Quick Links</h3>
-                        <ul className="footer-links" style={{ listStyle: 'none', padding: 0, marginBottom: '2rem' }}>
-                            <li style={{ marginBottom: '0.8rem' }}><Link to="/faq" style={{ color: 'inherit', textDecoration: 'none', fontSize: '0.95rem' }}>Frequently Asked Questions</Link></li>
+                        <ul className="footer-links" style={{ listStyle: 'none', padding: 0 }}>
+                            <li style={{ marginBottom: '0.8rem' }}><Link to="/#packages" style={{ color: 'inherit', textDecoration: 'none', fontSize: '0.95rem' }}>Packages</Link></li>
+                            <li style={{ marginBottom: '0.8rem' }}><Link to="/#services" style={{ color: 'inherit', textDecoration: 'none', fontSize: '0.95rem' }}>Services</Link></li>
                             <li style={{ marginBottom: '0.8rem' }}><Link to="/#booking" style={{ color: 'inherit', textDecoration: 'none', fontSize: '0.95rem' }}>Book a Space</Link></li>
-                        </ul>
-                        <h3>Contact Us</h3>
-                        <ul>
-                            <li><Phone size={18} /> +91-XXXXXXXXXX</li>
-                            <li><Mail size={18} /> info@keralayogaspaces.com</li>
-                            <li><MapPin size={18} /> Kottayam, Kerala, India</li>
+                            <li style={{ marginBottom: '0.8rem' }}><Link to="/faq" style={{ color: 'inherit', textDecoration: 'none', fontSize: '0.95rem' }}>FAQ</Link></li>
                         </ul>
                     </div>
 
-                    <div className="footer-newsletter">
-                        <h3>Newsletter</h3>
-                        <p>Stay updated with our latest retreats and workshops.</p>
-                        <form className="newsletter-form">
-                            <input type="email" placeholder="Your email address" />
-                            <button type="submit" className="btn-primary">Join</button>
-                        </form>
+                    <div className="footer-contact">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><Phone size={18} /> +91-9447870386</li>
+                            <li><Mail size={18} /> chamundikerala@gmail.com</li>
+                            <li><MapPin size={18} /> Kottayam, Kerala, India</li>
+                        </ul>
                     </div>
                 </div>
                 <div className="footer-bottom">

@@ -1,9 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, Users, MessageSquare, Info, ArrowRight, Award, Instagram, Facebook, Mail } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { toast } from 'react-toastify';
 import './Booking.css';
 
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_cpjd2t6';
+const EMAILJS_TEMPLATE_ID = 'template_kw9pyac';
+const EMAILJS_PUBLIC_KEY = 'g29o6rhguUYNKXTAf';
+
 const Booking = () => {
+    const formRef = useRef();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -17,10 +27,63 @@ const Booking = () => {
         requirements: '',
     });
 
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("Booking request submitted! We will contact you shortly to confirm.");
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        // Map purpose values to full display text
+        const purposeLabels = {
+            'class': 'Yoga Class / Session',
+            'workshop': 'Workshop / Event',
+            'private': 'Private Practice',
+            'retreat': 'Retreat'
+        };
+
+        // Prepare template parameters
+        const templateParams = {
+            from_name: formData.name,
+            from_email: formData.email,
+            phone: formData.phone,
+            country: formData.country,
+            date: formData.date,
+            time: formData.time,
+            duration: formData.duration,
+            participants: formData.participants,
+            purpose: purposeLabels[formData.purpose] || formData.purpose,
+            requirements: formData.requirements,
+        };
+
+        try {
+            await emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_ID,
+                templateParams,
+                EMAILJS_PUBLIC_KEY
+            );
+
+            setSubmitStatus('success');
+            toast.success('Booking request sent successfully! We will contact you shortly.');
+            // Reset form
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                country: '',
+                date: '',
+                time: '',
+                duration: '1',
+                participants: '',
+                purpose: 'class',
+                requirements: '',
+            });
+        } catch (error) {
+            console.error('EmailJS Error:', error);
+            setSubmitStatus('error');
+            toast.error('Failed to send request. Please try again or contact us directly.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -138,17 +201,34 @@ const Booking = () => {
                             </div>
 
                             <div className="form-group">
-                                <label>Special Requirements <span className="required-star">*</span></label>
+                                <label>Special Requirements (Optional)</label>
                                 <textarea
                                     rows="4"
                                     placeholder="Any specific equipment or setup needed?"
-                                    required
                                     value={formData.requirements}
                                     onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
                                 ></textarea>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">Submit Booking Request</button>
+                            {submitStatus === 'success' && (
+                                <div className="form-message success">
+                                    ✓ Booking request sent successfully! We will contact you shortly.
+                                </div>
+                            )}
+
+                            {submitStatus === 'error' && (
+                                <div className="form-message error">
+                                    ✗ Failed to send request. Please try again or contact us directly.
+                                </div>
+                            )}
+
+                            <button
+                                type="submit"
+                                className="btn btn-primary"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? 'Sending...' : 'Submit Booking Request'}
+                            </button>
                         </form>
                     </div>
 
